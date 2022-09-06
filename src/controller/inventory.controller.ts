@@ -7,20 +7,27 @@ import Inventory from '../models/inventory.model';
 
 const addInventory = async(req:Request,res:Response)=>{
     try{
+        console.log("add inventory function calling..");
+        console.log(req.body)
         const inventory:IInventory|any=new Inventory(req.body);
-        const product = await Product.findOne({id:req.body});
+        const product = await Product.findOne({id:req.body.product_id});
 
-        if(product==null){
+        console.log(product);
+
+        if(product){
+            console.log('asdasd')
             const result = await inventory.save();
+            console.log('nope')
             if(result===null){
-                res.sendStatus(500);
+               return res.sendStatus(500);
             }else{
-                res.status(201).json({status:201,data:result});
+                return res.status(201).json({status:201,data:result});
             }
         } else{
-            res.sendStatus(422);
+            return res.status(500).json({sucess: false, message: "Something went wrong."});
         }
     }catch(error:any){
+        console.log(error);
         return res.json({
             message:"Inventory nod addded",
             success:false

@@ -25,14 +25,14 @@ const addHistory = async (req:Request,res:Response)=>{
             const resPro = await product.save();
 
             if(result ===null){
-                res.sendStatus(500);
+                return res.sendStatus(500);
 
             }
             else{
-                res.status(201).json({status:201,data:result});
+                return res.status(201).json({status:201,data:result});
             }
         }else{
-            res.sendStatus(422).json({
+            return res.status(422).json({
                 message:"invalid entries"
             });
         }

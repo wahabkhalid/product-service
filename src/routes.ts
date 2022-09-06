@@ -192,18 +192,18 @@ app.get('/getHistory',celebrate({
 
 app.post('/addInventory',celebrate({
     [Segments.BODY]:Joi.object().keys({
+        product_id:Joi.string().length(24).required(),
         price:Joi.number().required(),
-        stock:Joi.number().required(),
-        product_id:Joi.string().length(24).required()
+        stock:Joi.number().required()
     
     })
 }),passport.authenticate("jwt",{session:false}),addInventory);
 
-app.patch('/updateHistory',celebrate({
+app.patch('/updateInventory',celebrate({
     [Segments.BODY]:Joi.object().keys({
-        price:Joi.number().required(),
-        stock:Joi.number().required(),
-        product_id:Joi.string().length(24).required()
+        product_id:Joi.string().length(24).required(),
+        price:Joi.number().required(), 
+        stock:Joi.number().required()
 
 })
 }),passport.authenticate("jwt",{session:false}),updateInventory);

@@ -4,7 +4,7 @@ import  Product  from "./product.model";
 
 export interface IInventory extends mongoose.Document{
     product_id: string,
-    price: Number,
+    price: number,
     stock:number,
     
    // createdAt: Date;
@@ -21,7 +21,7 @@ const inventorySchema = new mongoose.Schema(
             unique:true
         },*/
 
-        product_id:{type:String,required:true},
+        product_id:{type:mongoose.Schema.Types.ObjectId,required:true,ref:"Product"},
         price:{type:Number,required:true},
         
         stock: { type: Number, required: true },
